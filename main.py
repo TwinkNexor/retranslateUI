@@ -15,6 +15,8 @@ from PyQt6.QtWidgets import (QApplication, QLabel, QMainWindow, QPushButton,
     QSizePolicy, QStatusBar, QTabWidget, QTextEdit,
     QWidget)
 
+import socket
+
 
 
 class Ui_MainWindow(QMainWindow):
@@ -81,7 +83,16 @@ QLabel { color: white}
         self.pushButton_2.setStyleSheet("color: white; border-radius: 15px;border: 3px solid white; background-color: rgb(204, 123, 90);")
         QMetaObject.connectSlotsByName(self)
     # setupUi
-
+        self.pushButton.clicked.connect(self.ifclickedb1)
+        self.pushButton_2.clicked.connect(self.ifclickedb2)
+        self.input = QTextEdit
+    def ifclickedb1(self):
+        print("Clicked!")
+        b = self.input
+        a = ""
+        print(b)
+    def ifclickedb2(self):
+        print("Clicked!")
     def retranslateUi(self):
         self.setWindowTitle(QCoreApplication.translate("Test", u"Test", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Enter", None))
