@@ -8,7 +8,7 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 import sys
-
+import requests
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
@@ -107,12 +107,13 @@ QLabel { color: white}
     def ifclickedb1(self):
         print("Clicked!")
         b = self.textEdit.toPlainText()
-    def codegenerate(self):
-        return str(random.randint(10000000, 99999999))
-
+        response = requests.get("http://127.0.0.1:5000/take")
+        print(response.text)
     def ifclickedb2(self):
         print("Clicked!")
-        self.label_3.setText(self.codegenerate())
+        response = requests.get("http://127.0.0.1:5000/generate")
+        self.label_3.setText(response.text)
+
     def retranslateUi(self):
         self.setWindowTitle(QCoreApplication.translate("retranslateUI", u"retranslateUI", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Enter", None))
