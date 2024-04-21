@@ -9,13 +9,19 @@
 ################################################################################
 import sys
 
-from PyQt6.QtCore import QCoreApplication, QDate, QDateTime, QLocale, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt
-from PyQt6.QtGui import QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QGradient, QIcon, QImage, QKeySequence, QLinearGradient, QPainter, QPalette, QPixmap, QRadialGradient, QTransform
-from PyQt6.QtWidgets import (QApplication, QLabel, QMainWindow, QPushButton,
-    QSizePolicy, QStatusBar, QTabWidget, QTextEdit,
-    QWidget)
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QApplication, QFrame, QLabel, QMainWindow,
+    QPushButton, QSizePolicy, QStatusBar, QTabWidget,
+    QTextEdit, QWidget)
 
 import socket
+import random
 
 
 
@@ -42,12 +48,17 @@ class Ui_MainWindow(QMainWindow):
         self.label = QLabel(self.tab)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(0, 10, 151, 16))
+        self.line = QFrame(self.tab)
+        self.line.setObjectName(u"line")
+        self.line.setGeometry(QRect(0, 0, 130, 3))
+        self.line.setFrameShape(QFrame.HLine)
+        self.line.setLineWidth(2)
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")
         self.label_2 = QLabel(self.tab_2)
         self.label_2.setObjectName(u"label_2")
-        self.label_2.setGeometry(QRect(0, 10, 151, 16))
+        self.label_2.setGeometry(QRect(0, 5, 151, 16))
         self.pushButton_2 = QPushButton(self.tab_2)
         self.pushButton_2.setObjectName(u"pushButton_2")
         self.pushButton_2.setGeometry(QRect(230, 30, 81, 31))
@@ -58,6 +69,11 @@ class Ui_MainWindow(QMainWindow):
         self.label_3.setAutoFillBackground(False)
         self.label_3.setStyleSheet(u"font: 500 11pt \"Yu Gothic Medium\"; border: BlackWhite\n"
 "")
+        self.line_2 = QFrame(self.tab_2)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setGeometry(QRect(0, 0, 130, 3))
+        self.line_2.setFrameShape(QFrame.HLine)
+        self.line_2.setLineWidth(2)
         self.tabWidget.addTab(self.tab_2, "")
         self.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(self)
@@ -82,19 +98,23 @@ QLabel { color: white}
         self.pushButton.setStyleSheet("color: white; border-radius: 15px;border: 3px solid white; background-color: rgb(204, 123, 90);")
         self.pushButton_2.setStyleSheet("color: white; border-radius: 15px;border: 3px solid white; background-color: rgb(204, 123, 90);")
         QMetaObject.connectSlotsByName(self)
+        self.line.setStyleSheet("color: white;")
+        self.line_2.setStyleSheet("color: white;")
     # setupUi
         self.pushButton.clicked.connect(self.ifclickedb1)
         self.pushButton_2.clicked.connect(self.ifclickedb2)
-        self.input = QTextEdit
+        a = self.label
     def ifclickedb1(self):
         print("Clicked!")
-        b = self.input
-        a = ""
-        print(b)
+        b = self.textEdit.toPlainText()
+    def codegenerate(self):
+        return str(random.randint(10000000, 99999999))
+
     def ifclickedb2(self):
         print("Clicked!")
+        self.label_3.setText(self.codegenerate())
     def retranslateUi(self):
-        self.setWindowTitle(QCoreApplication.translate("Test", u"Test", None))
+        self.setWindowTitle(QCoreApplication.translate("retranslateUI", u"retranslateUI", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Enter", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043a\u043e\u0434 \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u044f", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Connect", None))
