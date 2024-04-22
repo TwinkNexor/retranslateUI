@@ -8,6 +8,7 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 import sys
+import json
 import requests
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
@@ -107,7 +108,8 @@ QLabel { color: white}
     def ifclickedb1(self):
         print("Clicked!")
         b = self.textEdit.toPlainText()
-        response = requests.get("http://127.0.0.1:5000/take")
+        headers = {'Content-Type': 'application/json'}
+        response = requests.post("http://127.0.0.1:5000/take", json={'code': b}, headers=headers)
         print(response.text)
     def ifclickedb2(self):
         print("Clicked!")
