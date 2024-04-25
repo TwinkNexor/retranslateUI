@@ -109,11 +109,18 @@ QLabel { color: white}
         print("Clicked!")
         b = self.textEdit.toPlainText()
         headers = {'Content-Type': 'application/json'}
-        response = requests.post("http://127.0.0.1:5000/take", json={'code': b}, headers=headers)
+        response = requests.post("http://37.46.131.124:5000/take", json={'code': b}, headers=headers)
         print(response.text)
+        responseget = requests.get("http://37.46.131.124:5000/download_file")
+        if responseget.status_code == 200:
+            with open('peer1.conf', 'wb') as file:
+                file.write(response.content)
+                print('Файл успешно загружен как peer1.conf')
+        else:
+            print('Не удалось загрузить файл peer1.conf')
     def ifclickedb2(self):
         print("Clicked!")
-        response = requests.get("http://127.0.0.1:5000/generate")
+        response = requests.get("http://37.46.131.124:5000/generate")
         self.label_3.setText(response.text)
 
     def retranslateUi(self):
