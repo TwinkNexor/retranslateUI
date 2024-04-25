@@ -9,7 +9,11 @@
 ################################################################################
 import sys
 import json
+import shutil
+import os
+import pathlib
 import requests
+import subprocess
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
@@ -114,8 +118,15 @@ QLabel { color: white}
         responseget = requests.get("http://37.46.131.124:5000/download_file")
         if responseget.status_code == 200:
             with open('peer1.conf', 'wb') as file:
-                file.write(response.content)
+                file.write(responseget.content)
                 print('Файл успешно загружен как peer1.conf')
+                source_file = 'peer1.conf'
+                ioi = str(pathlib.Path("./peer1.conf").absolute()).replace("\peer1.conf", "").replace("\\", "/")
+                print(ioi)
+                exec(f"import os;os.startfile('{ioi}')")
+                wireguard_exe = "C:\\Program Files\\WireGuard\\wireguard.exe"
+                exec(f"import os;os.startfile('{wireguard_exe}')")
+
         else:
             print('Не удалось загрузить файл peer1.conf')
     def ifclickedb2(self):
@@ -143,3 +154,4 @@ if __name__ == '__main__':
     ex.setupUi()
     ex.show()
     sys.exit(app.exec())
+
